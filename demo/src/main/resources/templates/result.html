@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ecf0f3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ecf0f3;
+            border-radius: 20px;
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #3795BD;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #ecf0f3;
+            box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-weight: 400;
+        }
+
+        th {
+            background-color: #3795BD;
+            color: white;
+            font-weight: 900;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            background-color: #EF5A6F;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #E4003A;
+            box-shadow: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3795BD;
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #EF5A6F;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Details Saved Successfully</h1>
+        
+        <!-- Displaying the list of persons in a table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Salary</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person : ${persons}">
+                    <td th:text="${person.name}"></td>
+                    <td th:text="${person.age}"></td>
+                    <td th:text="${person.salary}"></td>
+                    <td>
+                        <!-- Delete Button -->
+                        <a th:href="@{/person/delete/{id}(id=${person.id})}" onclick="return confirm('Are you sure you want to delete this person?')" class="btn">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Back to Form Button -->
+        <button onclick="window.location.href='/person/form'">Go Back to Form</button>
+    </div>
+</body>
+</html>
